@@ -23,7 +23,8 @@ namespace ProviderQuality.Console
                     new Award ("ACME Partner Facility", 5, 7),
                     new BlueDistinctionPlus ("Blue Distinction Plus", 0, 80),
                     new BlueCompare ("Blue Compare", 15, 20),
-                    new Award ("Top Connected Providers", 3, 6)
+                    new Award ("Top Connected Providers", 3, 6),
+                    new BlueStar("Blue Star", 5, 50)
                 }
 
             };
