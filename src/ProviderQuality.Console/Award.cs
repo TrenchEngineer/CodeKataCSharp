@@ -8,10 +8,30 @@ namespace ProviderQuality.Console
 {
     public class Award
     {
-        public string Name { get; set; }
+        protected string Name;
 
-        public int SellIn { get; set; }
+        protected int ExpiresIn;
 
-        public int Quality { get; set; }
+        protected int Quality;
+
+        public void UpdateAward()
+        {
+            UpdateQuality();
+            UpdateExpiresIn();
+        }
+
+        public virtual void UpdateQuality()
+        {
+            if (Quality > 0) Quality--;
+        }
+
+        public virtual void UpdateExpiresIn()
+        {
+            ExpiresIn--;
+        }
+
+        public virtual string getName() { return Name; }
+        public virtual int getExpiresIn() { return ExpiresIn; }
+        public virtual int getQuality() { return Quality; }
     }
 }

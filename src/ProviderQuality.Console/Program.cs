@@ -18,23 +18,32 @@ namespace ProviderQuality.Console
             {
                 Awards = new List<Award>
                 {
-                    new Award {Name = "Gov Quality Plus", SellIn = 10, Quality = 20},
-                    new Award {Name = "Blue First", SellIn = 2, Quality = 0},
-                    new Award {Name = "ACME Partner Facility", SellIn = 5, Quality = 7},
-                    new Award {Name = "Blue Distinction Plus", SellIn = 0, Quality = 80},
-                    new Award {Name = "Blue Compare", SellIn = 15, Quality = 20},
-                    new Award {Name = "Top Connected Providres", SellIn = 3, Quality = 6}
+                    new GovQualityPlus ("Gov Quality Plus", 10, 20),
+                    new BlueFirst ("Blue First", 2, 0),
+                    new AcmePartnerFacility ("ACME Partner Facility", 5, 7),
+                    new BlueDistinctionPlus ("Blue Distinction Plus", 0, 80),
+                    new BlueCompare ("Blue Compare", 15, 20),
+                    new TopConnectedProviders ("Top Connected Providers", 3, 6)
                 }
 
             };
 
-            app.UpdateQuality();
+            //app.UpdateQuality();
+
+            foreach(Award award in app.Awards)
+            {
+                award.UpdateAward();
+                System.Console.WriteLine(award.GetType().Name);
+                System.Console.WriteLine(award.getName());
+                System.Console.WriteLine(award.getExpiresIn());
+                System.Console.WriteLine(award.getQuality());
+            }
 
             System.Console.ReadKey();
 
         }
 
-        public void UpdateQuality()
+        /*public void UpdateQuality()
         {
             for (var i = 0; i < Awards.Count; i++)
             {
@@ -45,6 +54,7 @@ namespace ProviderQuality.Console
                         if (Awards[i].Name != "Blue Distinction Plus")
                         {
                             Awards[i].Quality = Awards[i].Quality - 1;
+
                         }
                     }
                 }
@@ -108,7 +118,7 @@ namespace ProviderQuality.Console
                     }
                 }
             }
-        }
+        }*/
 
     }
 
