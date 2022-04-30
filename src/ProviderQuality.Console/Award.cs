@@ -14,15 +14,33 @@ namespace ProviderQuality.Console
 
         protected int Quality;
 
-        public void UpdateAward()
-        {
-            UpdateQuality();
-            UpdateExpiresIn();
+        public Award (string name, int epxiresIn, int quality) { 
+            Name = name; 
+
+            ExpiresIn = epxiresIn; 
+
+            Quality = quality; 
         }
 
-        public virtual void UpdateQuality()
+        public void UpdateAward()
         {
+            UpdateQualityPreExpiration();
+
+            UpdateExpiresIn();
+
+            UpdateQualityPostExpiration();
+        }
+
+        public virtual void UpdateQualityPreExpiration()
+        {
+            // If the quality is greater than zero always decrement it
             if (Quality > 0) Quality--;
+        }
+
+        public virtual void UpdateQualityPostExpiration()
+        {
+            // If the expiration date has passed decrement the quality again
+            if (ExpiresIn < 0 && Quality > 0) Quality--;            
         }
 
         public virtual void UpdateExpiresIn()
@@ -31,7 +49,9 @@ namespace ProviderQuality.Console
         }
 
         public virtual string getName() { return Name; }
+
         public virtual int getExpiresIn() { return ExpiresIn; }
+
         public virtual int getQuality() { return Quality; }
     }
 }

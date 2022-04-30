@@ -18,25 +18,36 @@ namespace ProviderQuality.Console
             {
                 Awards = new List<Award>
                 {
-                    new GovQualityPlus ("Gov Quality Plus", 10, 20),
+                    new Award ("Gov Quality Plus", 10, 20),
                     new BlueFirst ("Blue First", 2, 0),
-                    new AcmePartnerFacility ("ACME Partner Facility", 5, 7),
+                    new Award ("ACME Partner Facility", 5, 7),
                     new BlueDistinctionPlus ("Blue Distinction Plus", 0, 80),
                     new BlueCompare ("Blue Compare", 15, 20),
-                    new TopConnectedProviders ("Top Connected Providers", 3, 6)
+                    new Award ("Top Connected Providers", 3, 6)
                 }
 
             };
 
             //app.UpdateQuality();
 
-            foreach(Award award in app.Awards)
+            int day = 1;
+
+            while (day <= 31)
             {
-                award.UpdateAward();
-                System.Console.WriteLine(award.GetType().Name);
-                System.Console.WriteLine(award.getName());
-                System.Console.WriteLine(award.getExpiresIn());
-                System.Console.WriteLine(award.getQuality());
+                System.Console.WriteLine($"Day - {day}");
+
+                foreach (Award award in app.Awards)
+                {
+                    award.UpdateAward();
+                    //System.Console.WriteLine(award.GetType().Name);
+                    System.Console.WriteLine(award.getName());
+                    System.Console.WriteLine(award.getExpiresIn());
+                    System.Console.WriteLine(award.getQuality());
+                }
+
+                System.Console.WriteLine();
+
+                day++;
             }
 
             System.Console.ReadKey();

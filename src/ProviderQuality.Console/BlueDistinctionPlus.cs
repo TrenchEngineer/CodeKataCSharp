@@ -8,22 +8,25 @@ namespace ProviderQuality.Console
 {
     public class BlueDistinctionPlus : Award
     {
-        public BlueDistinctionPlus(string name, int expiresIn, int quality)
+        public BlueDistinctionPlus(string name, int expiresIn, int quality) : base(name, expiresIn, quality)
         {
-            Name = name;
-            ExpiresIn = expiresIn;
-            Quality = quality;
+
 
         }
 
-        public override void UpdateQuality()
+        public override void UpdateQualityPreExpiration()
         {
-            // Do nothing
+            // Do nothing, the quality of Blue Distinction Plus uneffected by quality updates
+        }
+
+        public override void UpdateQualityPostExpiration()
+        {
+            // Do nothing, the quality of Blue Distinction Plus uneffected by quality updates
         }
 
         public override void UpdateExpiresIn()
         {
-            // Do nothing
+            // Do nothing, the quality of Blue Distinction Plus uneffected by expiration dates
         }
     }
 }

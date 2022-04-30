@@ -42,9 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcmePartnerFacility.cs" />
-    <Compile Include="TopConnectedProviders.cs" />
-    <Compile Include="GovQualityPlus.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="BlueDistinctionPlus.cs" />
     <Compile Include="BlueCompare.cs" />
     <Compile Include="BlueFirst.cs" />
