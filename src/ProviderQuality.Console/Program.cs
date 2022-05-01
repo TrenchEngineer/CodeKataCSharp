@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProviderQuality.Console
 {
@@ -18,120 +20,37 @@ namespace ProviderQuality.Console
             {
                 Awards = new List<Award>
                 {
-                    new Award ("Gov Quality Plus", 10, 20),
-                    new BlueFirst ("Blue First", 2, 0),
-                    new Award ("ACME Partner Facility", 5, 7),
-                    new BlueDistinctionPlus ("Blue Distinction Plus", 0, 80),
-                    new BlueCompare ("Blue Compare", 15, 20),
-                    new Award ("Top Connected Providers", 3, 6),
-                    new BlueStar("Blue Star", 5, 50)
+                    new Award (Constants.GovQualityPlus, 10, 20),
+                    new BlueFirst (Constants.BlueFirst, 2, 0),
+                    new Award (Constants.AcmePartnerFacility, 5, 7),
+                    new BlueDistinctionPlus (Constants.BlueDisctinctionPlus, 0, 80),
+                    new BlueCompare (Constants.BlueCompare, 15, 20),
+                    new Award (Constants.TopConnectedProviders, 3, 6),
+                    new BlueStar(Constants.BlueStar, 5, 50)
                 }
 
             };
 
-            //app.UpdateQuality();
-
-            int day = 1;
-
-            while (day <= 31)
+            // Verifies that any initial data does not violate the award quality constraints
+            try
             {
-                System.Console.WriteLine($"Day - {day}");
-
-                foreach (Award award in app.Awards)
-                {
-                    award.UpdateAward();
-                    //System.Console.WriteLine(award.GetType().Name);
-                    System.Console.WriteLine(award.getName());
-                    System.Console.WriteLine(award.getExpiresIn());
-                    System.Console.WriteLine(award.getQuality());
-                }
-
-                System.Console.WriteLine();
-
-                day++;
+                app.Awards.ToList().ForEach(award => award.ValidateQuality());
             }
+            catch(Exception e)
+            {
+                System.Console.WriteLine($"{e.Message}\n\nPress any key to exit application.");
+
+                System.Console.ReadKey();
+
+                Environment.Exit(0);
+            }
+            
+            app.Awards.ToList().ForEach(award => award.UpdateAward());
+
+            System.Console.WriteLine("Awards updated, press any key to exit application.");
 
             System.Console.ReadKey();
 
         }
-
-        /*public void UpdateQuality()
-        {
-            for (var i = 0; i < Awards.Count; i++)
-            {
-                if (Awards[i].Name != "Blue First" && Awards[i].Name != "Blue Compare")
-                {
-                    if (Awards[i].Quality > 0)
-                    {
-                        if (Awards[i].Name != "Blue Distinction Plus")
-                        {
-                            Awards[i].Quality = Awards[i].Quality - 1;
-
-                        }
-                    }
-                }
-                else
-                {
-                    if (Awards[i].Quality < 50)
-                    {
-                        Awards[i].Quality = Awards[i].Quality + 1;
-
-                        if (Awards[i].Name == "Blue Compare")
-                        {
-                            if (Awards[i].SellIn < 11)
-                            {
-                                if (Awards[i].Quality < 50)
-                                {
-                                    Awards[i].Quality = Awards[i].Quality + 1;
-                                }
-                            }
-
-                            if (Awards[i].SellIn < 6)
-                            {
-                                if (Awards[i].Quality < 50)
-                                {
-                                    Awards[i].Quality = Awards[i].Quality + 1;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (Awards[i].Name != "Blue Distinction Plus")
-                {
-                    Awards[i].SellIn = Awards[i].SellIn - 1;
-                }
-
-                if (Awards[i].SellIn < 0)
-                {
-                    if (Awards[i].Name != "Blue First")
-                    {
-                        if (Awards[i].Name != "Blue Compare")
-                        {
-                            if (Awards[i].Quality > 0)
-                            {
-                                if (Awards[i].Name != "Blue Distinction Plus")
-                                {
-                                    Awards[i].Quality = Awards[i].Quality - 1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Awards[i].Quality = Awards[i].Quality - Awards[i].Quality;
-                        }
-                    }
-                    else
-                    {
-                        if (Awards[i].Quality < 50)
-                        {
-                            Awards[i].Quality = Awards[i].Quality + 1;
-                        }
-                    }
-                }
-            }
-        }*/
-
     }
-
 }

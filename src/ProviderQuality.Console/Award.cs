@@ -14,7 +14,8 @@ namespace ProviderQuality.Console
 
         protected int Quality;
 
-        public Award (string name, int epxiresIn, int quality) { 
+        public Award (string name, int epxiresIn, int quality) {
+
             Name = name; 
 
             ExpiresIn = epxiresIn; 
@@ -31,27 +32,57 @@ namespace ProviderQuality.Console
             UpdateQualityPostExpiration();
         }
 
-        public virtual void UpdateQualityPreExpiration()
+        protected virtual void UpdateQualityPreExpiration()
         {
             // If the quality is greater than zero always decrement it
             if (Quality > 0) Quality--;
         }
 
-        public virtual void UpdateQualityPostExpiration()
+        protected virtual void UpdateQualityPostExpiration()
         {
             // If the expiration date has passed decrement the quality again
             if (ExpiresIn < 0 && Quality > 0) Quality--;            
         }
 
-        public virtual void UpdateExpiresIn()
+        protected virtual void UpdateExpiresIn()
         {
             ExpiresIn--;
         }
 
-        public virtual string getName() { return Name; }
+        public virtual string GetName() { return Name; }
 
-        public virtual int getExpiresIn() { return ExpiresIn; }
+        public virtual int GetExpiresIn() { return ExpiresIn; }
 
-        public virtual int getQuality() { return Quality; }
+        public virtual int GetQuality() { return Quality; }
+
+        public void ValidateQuality()
+        {
+            ValidateMaximumQuality();
+            ValidateMinimumQuality();
+        }
+
+        protected virtual void ValidateMaximumQuality()
+        {
+            if (Quality > (int)NumericalConstants.Award_Maximum_Quality)
+            {
+                string message = $"Error detected in award {Name}:";
+
+                message += $"\nQuality cannot be greater than {(int)NumericalConstants.Award_Maximum_Quality}";
+
+                throw new ArgumentException(message);
+            }
+        }
+
+        private void ValidateMinimumQuality()
+        {
+            if (Quality < 0)
+            {
+                string message = $"Error detected in award {Name}:";
+
+                message += $"\nQuality cannot be less than zero";
+
+                throw new ArgumentException(message);
+            }
+        }
     }
 }

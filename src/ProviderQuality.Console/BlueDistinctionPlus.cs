@@ -14,19 +14,31 @@ namespace ProviderQuality.Console
 
         }
 
-        public override void UpdateQualityPreExpiration()
+        protected override void UpdateQualityPreExpiration()
         {
             // Do nothing, the quality of Blue Distinction Plus uneffected by quality updates
         }
 
-        public override void UpdateQualityPostExpiration()
+        protected override void UpdateQualityPostExpiration()
         {
             // Do nothing, the quality of Blue Distinction Plus uneffected by quality updates
         }
 
-        public override void UpdateExpiresIn()
+        protected override void UpdateExpiresIn()
         {
             // Do nothing, the quality of Blue Distinction Plus uneffected by expiration dates
+        }
+
+        protected override void ValidateMaximumQuality()
+        {
+            if (Quality > (int)NumericalConstants.Blue_Distinction_Plus_Maximum_Quality)
+            {
+                string message = $"Error detected in award {Name}:";
+
+                message += $"\nQuality cannot be greater than {(int)NumericalConstants.Blue_Distinction_Plus_Maximum_Quality}";
+
+                throw new ArgumentException(message);
+            }
         }
     }
 }

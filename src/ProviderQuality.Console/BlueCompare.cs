@@ -13,21 +13,21 @@ namespace ProviderQuality.Console
             
         }
 
-        public override void UpdateQualityPreExpiration()
+        protected override void UpdateQualityPreExpiration()
         {
-            if (Quality < (int)Constants.Maximum_Quality) Quality++;
+            if (Quality < (int)NumericalConstants.Award_Maximum_Quality) Quality++;
 
             // If the expiration date is zero or more days away check for double or triple quality update
             if (ExpiresIn >= 0)
             {
-                if (ExpiresIn <= (int)Constants.Blue_Compare_First_Expiration_Period) Quality++;
+                if (ExpiresIn <= (int)NumericalConstants.Blue_Compare_First_Expiration_Period) Quality++;
 
-                if (ExpiresIn <= (int)Constants.Blue_Compare_Second_Expiration_Period) Quality++;
+                if (ExpiresIn <= (int)NumericalConstants.Blue_Compare_Second_Expiration_Period) Quality++;
             }
             
         }
 
-        public override void UpdateQualityPostExpiration()
+        protected override void UpdateQualityPostExpiration()
         {
             // If the expiration date has passed and is negative, set the quality to zero
             if (ExpiresIn < 0) Quality = 0;

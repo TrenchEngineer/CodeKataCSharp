@@ -13,13 +13,13 @@ namespace ProviderQuality.Console
 
         }
 
-        public override void UpdateQualityPreExpiration()
+        protected override void UpdateQualityPreExpiration()
         {
             base.UpdateQualityPreExpiration();
             base.UpdateQualityPreExpiration();
         }
 
-        public override void UpdateQualityPostExpiration()
+        protected override void UpdateQualityPostExpiration()
         {
             base.UpdateQualityPostExpiration();
             base.UpdateQualityPostExpiration();
