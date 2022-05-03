@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProviderQuality.Console
 {
@@ -23,6 +19,9 @@ namespace ProviderQuality.Console
             Quality = quality; 
         }
 
+        /// <summary>
+        /// PUblic runner to update award quality
+        /// </summary>
         public void UpdateAward()
         {
             UpdateQualityPreExpiration();
@@ -32,18 +31,27 @@ namespace ProviderQuality.Console
             UpdateQualityPostExpiration();
         }
 
+        /// <summary>
+        /// Updates the quality calculation before considering the expiration days
+        /// </summary>
         protected virtual void UpdateQualityPreExpiration()
         {
             // If the quality is greater than zero always decrement it
             if (Quality > 0) Quality--;
         }
 
+        /// <summary>
+        /// Updates the quality calculation after considering the expiration days
+        /// </summary>
         protected virtual void UpdateQualityPostExpiration()
         {
             // If the expiration date has passed decrement the quality again
             if (ExpiresIn < 0 && Quality > 0) Quality--;            
         }
 
+        /// <summary>
+        /// Decrements the expires in day
+        /// </summary>
         protected virtual void UpdateExpiresIn()
         {
             ExpiresIn--;
@@ -55,12 +63,18 @@ namespace ProviderQuality.Console
 
         public virtual int GetQuality() { return Quality; }
 
+        /// <summary>
+        /// A public runner used to validate the data input for awards
+        /// </summary>
         public void ValidateQuality()
         {
             ValidateMaximumQuality();
             ValidateMinimumQuality();
         }
 
+        /// <summary>
+        /// Validates the maximum quality of an award
+        /// </summary>
         protected virtual void ValidateMaximumQuality()
         {
             if (Quality > (int)NumericalConstants.Award_Maximum_Quality)
@@ -73,6 +87,9 @@ namespace ProviderQuality.Console
             }
         }
 
+        /// <summary>
+        /// Validates the minimum quality of an award
+        /// </summary>
         private void ValidateMinimumQuality()
         {
             if (Quality < 0)

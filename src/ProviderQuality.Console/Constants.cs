@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProviderQuality.Console
+﻿namespace ProviderQuality.Console
 {
+    /// <summary>
+    /// Numerical constants used throughout the program
+    /// </summary>
     public enum NumericalConstants
     {
         Award_Maximum_Quality = 50,
@@ -14,6 +11,9 @@ namespace ProviderQuality.Console
         Blue_Distinction_Plus_Maximum_Quality = 80
     }
 
+    /// <summary>
+    /// String constants used throughout the program
+    /// </summary>
     public class Constants
     {
         public const string GovQualityPlus = "Gov Quality Plus";

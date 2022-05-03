@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProviderQuality.Console
+﻿namespace ProviderQuality.Console
 {
     public class BlueCompare : Award
     {
@@ -13,6 +7,12 @@ namespace ProviderQuality.Console
             
         }
 
+        /// <summary>
+        /// Overrides the parent method to apply BlueCompare specific logic for updating quality before expiration is considered
+        /// </summary>
+        /// <remarks>
+        /// BlueCompare quality changes accelerate depending on the number of expires in days remaining
+        /// </remarks>
         protected override void UpdateQualityPreExpiration()
         {
             if (Quality < (int)NumericalConstants.Award_Maximum_Quality) Quality++;
@@ -27,6 +27,9 @@ namespace ProviderQuality.Console
             
         }
 
+        /// <summary>
+        /// Overrides the parent method to apply BlueCompare specific logic for updating quality after expiration is considered
+        /// </summary>
         protected override void UpdateQualityPostExpiration()
         {
             // If the expiration date has passed and is negative, set the quality to zero
